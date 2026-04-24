@@ -15,8 +15,9 @@ app.use(express.json());
 
 // --- FRONTEND SERVING LOGIC (ABSOLUTE PATHS) ---
 // path.resolve ensures the server finds the folders regardless of where it's executed
-const FRONTEND_AUTH_PATH = path.resolve(__dirname, "..", "frontend_auth");
-const DASHBOARD_PATH = path.resolve(__dirname, "..", "dashboard");
+// Alternative "Safe" Pathing
+const FRONTEND_AUTH_PATH = path.join(process.cwd(), "..", "frontend_auth");
+const DASHBOARD_PATH = path.join(process.cwd(), "..", "dashboard");
 
 // Serve static files (CSS, JS, Images)
 app.use("/frontend_auth", express.static(FRONTEND_AUTH_PATH));
