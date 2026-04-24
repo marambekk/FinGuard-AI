@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const { Client } = require("pg");
 
+// Load Environment Variables
 if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config({ path: path.resolve(__dirname, "../../database_connection/.env") });
 }
@@ -12,17 +13,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// --- FRONTEND SERVING LOGIC ---
-// These lines tell Railway to serve your HTML/CSS/JS files
-app.use(express.static(path.join(__dirname, '../frontend_auth')));
-app.use('/dashboard', express.static(path.join(__dirname, '../dashboard')));
+// --- FRONTEND SERVING LOGIC (FIXED PATHS) ---
+// We use '..' to go up from 'website/backend' to 'website'
+const FRONTEND_AUTH_PATH = path.join(__dirname, "..", "frontend_auth");
+const DASHBOARD_PATH = path.join(__dirname, "..", "dashboard");
 
-// Default route: When someone visits your URL, show the Sign In page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend_auth/SignInPage.html'));
+// Serve static files (CSS, JS, Images) for each section
+app.use("/frontend_auth", express.static(FRONTEND_AUTH_PATH));
+app.use("/dashboard", express.static(DASHBOARD_PATH));
+
+// Default route: Serve the Sign In page
+app.get("/", (req, res) => {
+    res.sendFile(path.join(FRONTEND_AUTH_PATH, "SignInPage.html"));
 });
-// ------------------------------
+// --------------------------------------------
 
+// Routes
 const authRoutes = require("./src/routes/auth.routes");
 const dashboardRoutes = require("./src/routes/dashboard");
 app.use("/api/auth", authRoutes);
@@ -30,9 +36,6 @@ app.use("/api/dashboard", dashboardRoutes);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => console.log(`🚀 FinGuard Full-Stack Live on port ${PORT}`));
-
-// WebSocket & Postgres Listener (Keep your existing code here...)
-// ... [Insert the WebSocket and pgClient logic from your previous snippet] ...
 
 // 6. WebSocket Setup
 const wss = new WebSocket.Server({ server });
@@ -74,7 +77,7 @@ pgClient.on("notification", (msg) => {
     let event;
     try {
         event = JSON.parse(msg.payload);
-    } catch {
+    } catch (e) {
         event = { type: msg.channel, transaction_id: msg.payload };
     }
     broadcast({ type: event.type || msg.channel, data: event });
@@ -82,7 +85,7 @@ pgClient.on("notification", (msg) => {
 
 pgClient.on("error", (err) => {
     console.error("PostgreSQL listener error:", err);
-    setTimeout(startPostgresListener, 5000); // Reconnect logic
+    setTimeout(startPostgresListener, 5000); 
 });
 
 startPostgresListener();
