@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- Declares the document type as HTML5 -->
+<html lang="en">
+<head>
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Makes the page responsive on different screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title shown in the browser tab -->
+    <title>FinGuard AI - Sign In</title>
+
+    <!-- Main stylesheet for sign-in / sign-up pages -->
+    <link rel="stylesheet" href="SignPagesStyle.css">
+
+    <!-- Google Font: Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Main layout container -->
+<div class="auth-layout">
+
+    <!-- LEFT SIDE: Authentication form -->
+    <section class="form-side">
+        <div class="form-wrapper">
+
+            <!-- Logo section -->
+            <div class="logo">
+                <img src="FingGuard AI logo.png" alt="FinGuard AI logo" class="logo-icon" />
+                <strong>FinGuard AI</strong>
+            </div>
+
+            <!-- Page heading -->
+            <h1>Sign into Your Account</h1>
+
+            <!-- Subtitle text -->
+            <p class="subtitle">Access your Analyst Dashboard</p>
+
+            <!-- Sign-in form -->
+            <form class="signin-form" id="signinForm">
+
+                <!-- Email input field -->
+                <input type="email" name="email" placeholder="Email Address" required>
+
+                <!-- Password input field -->
+                <input type="password" name="password" placeholder="Password" required>
+
+                <!-- Extra form options -->
+                <div class="form-options">
+                    <!-- Link to forgot password page -->
+                    <a href="ForgotPasswordPage.html" class="forgot-password">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
+
+            <!-- Link to sign-up page -->
+            <p class="footer-link">
+                Don't have an account?
+                <a href="SignUpPage.html">Sign Up</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- RIGHT SIDE: Branding / slider content -->
+    <section class="brand-side">
+        <div class="slider">
+
+            <!-- Slide 1 (active by default) -->
+            <div class="slide active">
+                <h2>Our Vision</h2>
+                <p>
+                    FinGuard AI is built to redefine how financial systems
+                    detect and respond to cyber threats using intelligent automation.
+                </p>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <h2>Core Components</h2>
+                <p>
+                    Our platform combines AI analysis, anomaly detection,
+                    and real-time monitoring into one secure ecosystem.
+                </p>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <h2>Why FinGuard AI</h2>
+                <p>
+                    Because modern threats require smart, adaptive,
+                    and proactive security solutions.
+                </p>
+            </div>
+
+            <!-- Slider navigation dots -->
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+            <!-- Slider previous / next buttons -->
+            <div class="slider-controls">
+                <button class="nav prev"><</button>
+                <button class="nav next">></button>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<!-- Page footer -->
+<footer class="page-footer">
+    © 2026 FinGuard AI — National School of Cybersecurity
+</footer>
+
+<!-- JavaScript for slider & interactions -->
+<script src="SignPages.js"></script>
+
+</body>
+</html>
