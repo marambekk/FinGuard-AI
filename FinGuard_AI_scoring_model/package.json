@@ -1,0 +1,11 @@
+{
+  "name": "finguard-ai",
+  "version": "1.0.0",
+  "description": "Financial Fraud Guard AI",
+  "main": "listener/transaction_listener.js",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.2.4",
+    "pg": "^8.18.0"
+  }
+}

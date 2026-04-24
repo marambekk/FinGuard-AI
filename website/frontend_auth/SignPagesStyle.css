@@ -1,0 +1,474 @@
+/* ===========================
+   Reset & Base Styles
+   =========================== */
+
+/* Apply consistent box sizing and remove default spacing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    /* Global font */
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Base body styling */
+body {
+    min-height: 100vh;                     /* Full viewport height */
+    background: linear-gradient(135deg, #020617, #020617);
+    color: #e5e7eb;                        /* Default text color */
+    display: flex;
+    flex-direction: column;                /* Footer sticks to bottom */
+}
+
+
+/* ===========================
+   Main Layout
+   =========================== */
+
+/* Wrapper for left (form) and right (brand) sections */
+.auth-layout {
+    flex: 1;
+    display: flex;
+}
+
+
+/* ===========================
+   Form Side (Left)
+   =========================== */
+
+/* Left section container */
+.form-side {
+    flex: 1;
+    display: flex;
+    align-items: center;                   /* Vertical centering */
+    justify-content: center;               /* Horizontal centering */
+    background: linear-gradient(
+        180deg,
+        #020617 0%,
+        #030b1f 100%
+    );
+}
+
+/* Form content wrapper */
+.form-wrapper {
+    width: 100%;
+    max-width: 420px;                      /* Prevent overly wide form */
+    padding: 40px;
+}
+
+
+/* ===========================
+   Logo
+   =========================== */
+
+/* Logo container */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 35px;
+}
+
+/* Logo icon (image) */
+.logo-icon {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    background: linear-gradient(145deg, #3b82f6, #1e40af);
+    border-radius: 9px;
+    padding: 4px;
+}
+
+
+/* ===========================
+   Text
+   =========================== */
+
+/* Main page heading */
+h1 {
+    font-size: 1.9rem;
+    color: #f8fafc;
+    margin-bottom: 8px;
+}
+
+/* Subtitle text below heading */
+.subtitle {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-bottom: 40px;
+}
+
+
+/* ===========================
+   Form
+   =========================== */
+
+/* Form layout */
+.signin-form, .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;                             /* Space between fields */
+}
+
+/* Input fields */
+.signin-form input, .signup-form input  {
+    padding: 15px 16px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+}
+
+/* Placeholder text */
+.signin-form input::placeholder, .signup-form input::placeholder {
+    color: #9ca3af;
+}
+
+/* Input focus state */
+.signin-form input:focus, .signup-form input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56,189,248,0.25);
+    outline: none;
+}
+
+
+/* ===========================
+   Options (Forgot Password)
+   =========================== */
+
+/* Wrapper for form options */
+.form-options {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Forgot password link */
+.forgot-password {
+    font-size: 0.85rem;
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+/* Hover effect */
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+
+/* ===========================
+   Primary Button
+   =========================== */
+
+/* Main submit button */
+.btn-submit {
+    margin-top: 22px;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    box-shadow: 0 10px 22px rgba(37,99,235,0.35);
+
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffffff;
+
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover animation */
+.btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 35px rgba(37,99,235,0.6);
+}
+
+
+/* ===========================
+   Bottom Link
+   =========================== */
+
+/* Text below the form */
+.footer-link {
+    margin-top: 35px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #9ca3af;
+}
+
+/* Link inside footer text */
+.footer-link a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+/* Hover underline */
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* ===========================
+   Brand Side (Right)
+   =========================== */
+
+/* Right section container */
+.brand-side {
+    flex: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #020617 0%,
+        #04102a 35%,
+        #0b1f44 65%,
+        #04102a 100%
+    );
+
+    position: relative;
+}
+
+/* Vertical divider line */
+.brand-side::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+
+    background: linear-gradient(
+        transparent,
+        rgba(255,255,255,0.12),
+        transparent
+    );
+}
+
+
+/* ===========================
+   Brand Content (legacy / optional)
+   =========================== */
+
+.brand-content {
+    max-width: 420px;
+    padding: 40px;
+}
+
+.brand-content h2 {
+    font-size: 2.3rem;
+    margin-bottom: 12px;
+}
+
+.brand-content p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    margin-bottom: 22px;
+}
+
+.brand-content small {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    border-top: 1px solid rgba(255,255,255,0.25);
+    padding-top: 15px;
+    display: inline-block;
+}
+
+
+/* ===========================
+   Footer
+   =========================== */
+
+/* Page footer */
+.page-footer {
+    text-align: center;
+    padding: 14px;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    background: #020617;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+
+/* ===========================
+   Slider (Right Side)
+   =========================== */
+
+/* Slider container */
+.slider {
+    max-width: 420px;
+    padding: 40px;
+    text-align: left;
+}
+
+/* Individual slide (hidden by default) */
+.slide {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.9s ease,
+                transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Active slide */
+.slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+}
+
+/* Slide heading */
+.slide h2 {
+    font-size: 2.2rem;
+    margin-bottom: 14px;
+
+    /* Gradient text */
+    background: linear-gradient(
+        90deg,
+        #e5e7eb,
+        #93c5fd,
+        #e5e7eb
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Slide paragraph */
+.slide p {
+    font-size: 1.05rem;
+    color: #cbd5f5;
+    line-height: 1.6;
+}
+
+
+/* ===========================
+   Slider Dots
+   =========================== */
+
+/* Dot container */
+.slider-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* Inactive dot */
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+/* Active dot */
+.dot.active {
+    background: #38bdf8;
+    box-shadow: 0 0 10px rgba(56,189,248,0.8);
+}
+
+
+/* ===========================
+   Slider Controls
+   =========================== */
+
+/* Prev / next button container */
+.slider-controls {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    gap: 12px;
+}
+
+/* Navigation button */
+.nav {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.05);
+    color: #e5e7eb;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Hover state */
+.nav:hover {
+    background: rgba(56,189,248,0.15);
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56,189,248,0.4);
+}
+
+
+/* ===========================
+   Password Visibility Toggle
+   =========================== */
+
+/* Wrapper for password input + icon */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Extra padding for icon space */
+.password-wrapper input {
+    flex: 1;
+    padding-right: 40px;
+}
+
+/* Toggle icon container */
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Eye icon styling */
+.toggle-password svg {
+    width: 20px;
+    height: 20px;
+    stroke: #38bdf8;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.toggle-password:hover svg {
+    stroke: #60a5fa;
+}
+
+
+/* ===========================
+   Suggest Password Button
+   =========================== */
+
+/* Secondary action button */
+#suggestPassword {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+
+    border: 1px solid #38bdf8;
+    background: rgba(56, 189, 248, 0.05);
+    color: #38bdf8;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    align-self: flex-start;    /* Align left inside form */
+}
+
+/* Hover effect */
+#suggestPassword:hover {
+    background: rgba(56, 189, 248, 0.15);
+    box-shadow: 0 2px 6px rgba(56,189,248,0.25);
+    transform: translateY(-1px);
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinGuard Dashboard</title>
+  <link rel="stylesheet" href="dashboardStyle.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard-container">
+
+
+    <!-- ================= Sidebar ================= -->
+    <div id="error-banner" class="error-banner hidden"></div>
+    <div class="sidebar" id="sidebar">
+      <div class="logo">
+        <img src="../FingGuard AI logo.png" alt="FinGuard AI logo" class="logo-icon" />
+        <span class="logo-text">FinGuard</span>
+      </div>
+      <nav class="menu">
+        <a href="#overview" class="menu-item active">Overview</a>
+        <a href="#risk" class="menu-item">Risk Analytics</a>
+        <a href="#flagged" class="menu-item">Flagged Transactions</a>
+        <a href="#users" class="menu-item">User Profiles</a>
+        <a href="#ioc" class="menu-item">IOC & Alerts</a>
+      </nav>
+      <div class="sidebar-toggle" id="sidebarToggle">&#10094;</div>
+    </div>
+
+    <!-- ================= Main Content ================= -->
+    <div class="main-content">
+      <h1>FinGuard Dashboard</h1>
+      
+      <!-- Overview + Recent Transactions -->
+      <section id="overview" class="section">
+        <h2>Overview</h2>
+        <div class="cards-container">
+          <div class="card">
+            <h3>Total Transactions Today <span id="loader-total-today" class="mini-loader hidden"></span></h3>
+            <p id="total-transactions-today">Loading...</p>
+          </div>
+          <div class="card">
+            <h3>Total Transactions This Week <span id="loader-total-week" class="mini-loader hidden"></span></h3>
+            <p id="total-transactions-week">Loading...</p>
+          </div>
+          <div class="card">
+            <h3>Flagged Transactions <span id="loader-flagged" class="mini-loader hidden"></span></h3>
+            <p id="flagged-transactions">Loading...</p>
+          </div>
+        </div>
+
+        <!-- Full-width chart row placed under the three small cards -->
+        <div class="overview-chart-row">
+          <div class="chart-container full-width-chart">
+            <h3>Total Amount Processed (daily)</h3>
+            <canvas id="total-amount-chart" width="1200" height="420"></canvas>
+          </div>
+        </div>
+
+        <h2>Recent Transactions</h2>
+        <table id="recent-transactions-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User</th>
+              <th>Amount</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Risk Level</th>
+              <th>System Action</th>
+              <th>Analyst Action</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rows will be populated dynamically -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Risk Analytics -->
+      <section id="risk" class="section">
+        <h2>Risk Analytics</h2>
+        <div class="cards-container">
+          <div class="card">
+            <h3>Risk Level Distribution <span id="loader-risk" class="mini-loader hidden"></span></h3>
+            <ul id="risk-distribution-list">
+              <!-- Dynamic risk level counts -->
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Fraud vs Normal <span id="loader-fraud" class="mini-loader hidden"></span></h3>
+            <ul id="fraud-status-list">
+              <!-- Dynamic fraud counts -->
+            </ul>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <h3>Transactions Over Time</h3>
+          <canvas id="transactions-over-time-chart"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3>Fraud Transactions Over Time</h3>
+          <canvas id="fraud-over-time-chart"></canvas>
+        </div>
+      </section>
+
+      <!-- Flagged Transactions -->
+      <section id="flagged" class="section">
+        <h2>High Risk / Flagged Transactions</h2>
+        <table id="high-risk-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User</th>
+              <th>Amount</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Risk Level</th>
+              <th>System Action</th>
+              <th>Analyst Action</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Users Section -->
+      <section id="users" class="section">
+        <h2>User Profiles & Transactions</h2>
+        <table id="users-table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Balance</th>
+              <th>Suspicious Transactions</th>
+              <th>Total Transactions</th>
+              <th>Total Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- IOC & Alerts -->
+      <section id="ioc" class="section">
+        <h2>IOC & Alerts</h2>
+        <div class="cards-container">
+          <div class="card">
+            <h3>IOC Summary</h3>
+            <ul id="ioc-summary-list">
+              <!-- High Risk IP, Disposable Email, Device Velocity, etc. -->
+            </ul>
+          </div>
+        </div>
+
+        <h3>Transactions with IOC Flags</h3>
+        <table id="transactions-ioc-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User</th>
+              <th>Amount</th>
+              <th>High Risk IP</th>
+              <th>Disposable Email</th>
+              <th>Device Velocity</th>
+              <th>PII Changes</th>
+              <th>Impossible Travel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+
+        <h3>IOC Score Ranking</h3>
+        <table id="ioc-score-ranking-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User</th>
+              <th>Amount</th>
+              <th>Risk Level</th>
+              <th>System Action</th>
+              <th>IOC Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dashboardScript.js"></script>
+</body>
+</html>

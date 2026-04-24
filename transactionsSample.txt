@@ -1,0 +1,55 @@
+-- 1. Normal Transaction (Expected Risk: LOW)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-1001', 'U0040', 'CARD-40-A', 'PAYMENT', 'Amazon', CURRENT_TIMESTAMP, 50.00, 'USA', 'New York', 100, '104.16.243.5', 'https://amazon.com');
+
+-- 2. Potential Fraud (Disposable Identity Check)
+-- This should trigger 'disposable_identity' = TRUE in transaction_ioc because U0048 uses tempmail.com
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-1002', 'U0048', 'CARD-48-A', 'TRANSFER', 'Unknown_Recip', CURRENT_TIMESTAMP, 100.00, 'Italy', 'Rome', 102, '93.12.45.6', 'https://unknown-link.com');
+
+-- 3. Potential Fraud (High Risk IP Check)
+-- This matches '192.168.99.' in ref_high_risk_ips
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-1003', 'U0049', 'CARD-49-A', 'CASH_OUT', 'ATM-Dark', CURRENT_TIMESTAMP, 500.00, 'USA', 'Denver', 101, '192.168.99.55', 'https://bank-app.com');
+
+-- 1. Normal Daily Activity
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2001', 'U0040', 'CARD-40-A', 'PAYMENT', 'Starbucks', '2026-04-22 08:30:00', 15.50, 'USA', 'New York', 100, '104.16.243.5', 'https://starbucks.app');
+
+-- 2. "Odd Hour" Pattern (3:00 AM Transaction)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2002', 'U0041', 'CARD-41-A', 'CASH_OUT', 'ATM-Unknown', '2026-04-22 03:15:00', 200.00, 'USA', 'Chicago', 101, '72.14.213.1', 'https://banking.com');
+
+-- 3. Impossible Travel (User 40 in London 30 mins after NY)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2003', 'U0040', 'CARD-40-A', 'PAYMENT', 'London-Pub', '2026-04-22 09:00:00', 45.00, 'UK', 'London', 105, '25.10.11.2', 'https://pub-pay.uk');
+
+-- 4. High Amount Ratio (10x user's average)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2004', 'U0042', 'CARD-42-A', 'TRANSFER', 'Crypto-Exch', '2026-04-22 10:15:00', 3500.00, 'Spain', 'Madrid', 103, '80.12.1.4', 'https://binance.com');
+
+-- 5. Device Velocity (U0048 - Transaction 1 of 3)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2005', 'U0048', 'CARD-48-A', 'PAYMENT', 'Steam-Games', '2026-04-22 11:00:00', 60.00, 'Italy', 'Rome', 102, '93.12.45.6', 'https://steampowered.com');
+
+-- 6. Device Velocity (U0048 - Transaction 2 of 3, immediate follow-up)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2006', 'U0048', 'CARD-48-A', 'PAYMENT', 'Steam-Games', '2026-04-22 11:02:00', 120.00, 'Italy', 'Rome', 102, '93.12.45.6', 'https://steampowered.com');
+
+-- 7. Device Velocity (U0048 - Transaction 3 of 3, potential burst)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2007', 'U0048', 'CARD-48-A', 'PAYMENT', 'Steam-Games', '2026-04-22 11:04:00', 300.00, 'Italy', 'Rome', 102, '93.12.45.6', 'https://steampowered.com');
+
+-- 8. Phishing Referrer Check (Matches malicious URL pattern)
+-- First, add a malicious URL to your ref table if you haven't:
+-- INSERT INTO ref_malicious_urls VALUES ('%phishybank.com%');
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2008', 'U0043', 'CARD-43-A', 'PAYMENT', 'Retail-Store', '2026-04-22 12:45:00', 85.00, 'UK', 'London', 104, '45.1.2.3', 'http://secure-login.phishybank.com/login');
+
+-- 9. New IP/Device Combo
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2009', 'U0045', 'CARD-45-A', 'PAYMENT', 'Target', '2026-04-22 14:00:00', 150.00, 'USA', 'Seattle', 999, '192.0.2.1', 'https://target.com');
+
+-- 10. Large Cash-In (Standard Deposit)
+INSERT INTO transactions_raw (transaction_id, user_id, card_number, transaction_type, beneficiary, timestamp, amount, country, city, device_id, ip_address, http_referrer)
+VALUES ('TXN-2010', 'U0050', 'CARD-50-A', 'CASH_IN', 'Self', '2026-04-22 16:30:00', 2500.00, 'USA', 'Nashville', 110, '68.4.5.6', 'https://bank-app.com');

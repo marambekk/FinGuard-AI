@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- HTML5 document declaration -->
+<html lang="en">
+<head>
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Responsive layout on all screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Browser tab title -->
+    <title>FinGuard AI - Sign Up</title>
+
+    <!-- Shared stylesheet for authentication pages -->
+    <link rel="stylesheet" href="SignPagesStyle.css">
+
+    <!-- Google Font: Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Main authentication layout -->
+<div class="auth-layout">
+
+    <!-- LEFT SIDE: Sign up form -->
+    <section class="form-side">
+        <div class="form-wrapper">
+
+            <!-- Logo / branding -->
+            <div class="logo">
+                <img src="../FingGuard AI logo.png" alt="FinGuard AI logo" class="logo-icon" />
+                <strong>FinGuard AI</strong>
+            </div>
+
+            <!-- Page heading -->
+            <h1>Create Your Account</h1>
+
+            <!-- Subtitle -->
+            <p class="subtitle">Join the FinGuard AI platform</p>
+
+            <!-- Sign-up form -->
+            <form class="signup-form">
+
+                <!-- FULL name input -->
+                <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+                <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+
+
+                <!-- Email address input -->
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
+
+                <!-- Password field with visibility toggle -->
+                <div class="password-wrapper">
+
+                    <!-- Password input -->
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+
+                    <!-- Toggle password visibility icon -->
+                    <span class="toggle-password">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="20" height="20"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="#38bdf8"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             class="eye-icon">
+
+                            <!-- Eye outline -->
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+
+                            <!-- Eye pupil -->
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </span>
+                </div>
+
+                <!-- Confirm password input -->
+                <input type="password" id="confirm" name="confirm" placeholder="Confirm Password" required>
+
+                <!-- Password validation / helper message -->
+                <small id="passwordHelp"></small>
+
+                <!-- Button to auto-generate a strong password -->
+                <button id="suggestPassword" type="button">
+                    Suggest Strong Password
+                </button>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn-submit">
+                    Sign Up
+                </button>
+            </form>
+
+            <!-- Link to sign-in page -->
+            <p class="footer-link">
+                Already have an account?
+                <a href="SignInPage.html">Sign In</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- RIGHT SIDE: Branding / slider -->
+    <section class="brand-side">
+        <div class="slider">
+
+            <!-- Slide 1 (active by default) -->
+            <div class="slide active">
+                <h2>Secure by Design</h2>
+                <p>
+                    Security is embedded into every layer of FinGuard AI,
+                    from data ingestion to threat response.
+                </p>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <h2>Built for Analysts</h2>
+                <p>
+                    Designed with cybersecurity professionals in mind,
+                    offering clarity, speed, and control.
+                </p>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <h2>Future Ready</h2>
+                <p>
+                    Our platform evolves with emerging threats
+                    using adaptive AI models.
+                </p>
+            </div>
+
+            <!-- Slider indicator dots -->
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+            <!-- Slider navigation controls -->
+            <div class="slider-controls">
+                <button class="nav prev">‹</button>
+                <button class="nav next">›</button>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<!-- Page footer -->
+<footer class="page-footer">
+    © 2026 FinGuard AI — National School of Cybersecurity
+</footer>
+
+<!-- JavaScript for password logic, slider, and UI interactions -->
+<script src="SignPages.js"></script>
+
+</body>
+</html>
