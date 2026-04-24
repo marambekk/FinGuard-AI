@@ -13,21 +13,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// --- FRONTEND SERVING LOGIC (ABSOLUTE PATHS) ---
-// path.resolve ensures the server finds the folders regardless of where it's executed
-// Alternative "Safe" Pathing
-const FRONTEND_AUTH_PATH = path.join(process.cwd(), "..", "frontend_auth");
-const DASHBOARD_PATH = path.join(process.cwd(), "..", "dashboard");
+// --- FRONTEND SERVING LOGIC (RAILWAY OPTIMIZED) ---
+// On Railway, the root is /app. 
+// If your Root Directory is website/backend, then:
+// backend is at: /app
+// frontend_auth is at: /app/../frontend_auth (which is /app/frontend_auth if seen from the website folder)
 
-// Serve static files (CSS, JS, Images)
+const FRONTEND_AUTH_PATH = path.resolve(__dirname, "../../frontend_auth");
+const DASHBOARD_PATH = path.resolve(__dirname, "../../dashboard");
+
+console.log("Checking path 1:", FRONTEND_AUTH_PATH);
+console.log("Checking path 2:", DASHBOARD_PATH);
+
 app.use("/frontend_auth", express.static(FRONTEND_AUTH_PATH));
 app.use("/dashboard", express.static(DASHBOARD_PATH));
 
-// Default route: Serve the Sign In page
 app.get("/", (req, res) => {
-    const indexPath = path.join(FRONTEND_AUTH_PATH, "SignInPage.html");
-    console.log("Serving index from:", indexPath); // Helps debug in Railway logs
-    res.sendFile(indexPath);
+    res.sendFile(path.join(FRONTEND_AUTH_PATH, "SignInPage.html"), (err) => {
+        if (err) {
+            // This will tell us EXACTLY where it looked and failed
+            console.error("FAILED TO FIND FILE AT:", path.join(FRONTEND_AUTH_PATH, "SignInPage.html"));
+            res.status(404).send(`Server is live, but cannot find the HTML file. Looked in: ${FRONTEND_AUTH_PATH}`);
+        }
+    });
 });
 // --------------------------------------------
 
